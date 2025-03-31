@@ -1,0 +1,110 @@
+.cookieCard {
+  width: min(100%, 100%);
+  background: linear-gradient(to right, #396e84, #2e1221);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  margin: auto;
+  position: relative;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rmodalgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.cookieCard::before {
+  width: 200px;
+  height: 200px;
+  content: "";
+  background: linear-gradient(to right, #396e84, #2e1221);
+  position: absolute;
+  z-index: 1;
+  border-radius: 50%;
+  right: -5%;
+  top: -25%;
+}
+
+.cookieHeading {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: rgb(241, 241, 241);
+  z-index: 2;
+}
+
+.cookieDescription {
+  font-size: .9em;
+  color: rgb(241, 241, 241);
+  z-index: 2;
+}
+
+.cookieDescription a {
+  color: rgb(241, 241, 241);
+}
+
+.acceptButton {
+  padding: 11px 20px;
+  background-color: #7b57ff;
+  transition-duration: 0.2s;
+  border: none;
+  color: rgb(241, 241, 241);
+  cursor: pointer;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.acceptButton:hover {
+  background-color: #714aff;
+  transition-duration: 0.2s;
+}
+
+.flex {
+  display: flex;
+  gap: 1em;
+}
+
+.spaceBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+  width: 100%;
+}
+
+.form .coolinput {
+  display: flex;
+  flex-direction: column;
+  position: static;
+  width: 100%;
+}
+
+.form .coolinput label.text {
+  font-size: 0.75rem;
+  color: #818cf8;
+  /* font-weight: 700; */
+  position: relative;
+  top: 0.5rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  background-color: white;
+  color: #1f1e1e;
+  width: fit-content;
+}
+
+.form .coolinput input {
+  background-color: white;
+  padding: 11px 10px;
+  font-size: 0.75rem;
+  border: 1px #818cf8 solid;
+  border-radius: 5px;
+  display: block;
+  width: 100% !important;
+  color: #1f1e1e;
+}
+
+.form .coolinput input:focus {
+  outline: none;
+}

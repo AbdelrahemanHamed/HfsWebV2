@@ -1,0 +1,9 @@
+.sidebar-link {
+    /* Default styling */
+  }
+  
+  .sidebar-link.active {
+    background: linear-gradient(124.86deg, #63ccec 7.03%, #e44896 92.97%);
+    border-radius: 10px;
+  }
+  

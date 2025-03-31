@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Bayon");
+
+/* Tanseek Modern Pro Arabic */
+@font-face {
+  font-family: "Tanseek Modern Pro Arabic";
+  src: url("../fonts/mbc-arabic-font.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Poppins */
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Bebas Neue */
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("../fonts/BebasNeue.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* SF Pro Display */
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("../fonts/SFPRODISPLAYREGULAR.OTF") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}

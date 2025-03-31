@@ -1,0 +1,49 @@
+/* src/components/FloatingCallButton.css */
+.waves {
+    position: absolute;
+    border-radius: 50%;
+    /* background: rgba(225, 225, 228, 0.5); */
+    /* animation: wave 2.5s infinite; */
+    /* transform: scale(0); */
+    z-index: 0; /* Ensure waves are below the button */
+}
+
+.waves:nth-child(1) {
+    width: 100px;
+    height: 100px;
+    animation-delay: 0s;
+}
+
+.waves:nth-child(2) {
+    width: 120px;
+    height: 120px;
+    animation-delay: 0.5s;
+}
+
+.waves:nth-child(3) {
+    width: 140px;
+    height: 140px;
+    animation-delay: 1s;
+}
+
+@keyframes wave {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+

@@ -1,0 +1,42 @@
+.divider {
+  display: flex;
+  width: calc(100% - 225px);
+  /* border-bottom: 2px solid white; */
+  align-items: center;
+  justify-content: space-between;
+  margin: 1em auto;
+}
+
+.divider > .line {
+  width: 0;
+  height: 30px;
+  border: 1px solid white;
+}
+.divider > span {
+  padding: 0.3em;
+}
+
+.r,
+.l {
+  position: relative;
+  width: 100%;
+  transform: translateY(-1.1em);
+  text-align: center;
+}
+
+.r::before {
+  content: "";
+  top: 0;
+  left: calc(-0.5em - 2px);
+  width: 50%;
+  position: absolute;
+  border: 1px solid white;
+}
+.l::before {
+  content: "";
+  top: 0;
+  right: calc(-0.5em - 2px);
+  width: 50%;
+  position: absolute;
+  border: 1px solid white;
+}

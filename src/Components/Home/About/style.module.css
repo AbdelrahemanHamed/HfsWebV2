@@ -1,0 +1,11 @@
+.hero {
+  position: relative;
+  overflow: hidden !important;
+  width: 100vw;
+}
+
+.hero .container {
+  display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
+}
