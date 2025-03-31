@@ -34,95 +34,64 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setIsSubmitting(true);
-
-		// Prepare the request payload
+	
 		const requestBody = {
 			account,
 			password,
 			remember_me: remember_me.toString(),
 		};
-
-		console.log("Request payload:", requestBody); // Debug log
-
+	
 		try {
 			const response = await axios.post(`${baseUrl}/login`, requestBody, {
-				headers: {
-					"Content-Type": "application/json",
-				},
+				headers: { "Content-Type": "application/json" },
 			});
-
+	
 			console.log("Login response:", response.data);
-			console.log("User Data",response.data.result.user) // Debug log
-			
-			// Store the user data in localStorage
-			const user = response.data.result.user;
-			const userArray = [
-				user.id, 
-				user.full_name, 
-				user.first_name, 
-				user.last_name, 
-				user.email, 
-				user.id_code, 
-				user.sponsor.id, 
-				user.sponsor.id_code, 
-				user.sponsor.full_name,
-				user.upline.id, 
-				user.upline.id_code, 
-				user.upline.full_name,
-				user.left_leg.id,
-				user.left_leg.id_code,
-				user.left_leg.full_name,
-				user.rightLeg.id,
-				user.rightLeg.id_code,
-				user.rightLeg.full_name,
-				user.cv,
-				user.left_leg_cv,
-				user.right_leg_cv,
-				user.placement,
-				user.mobile,
-				user.account_status,
-				user.photo,
-				user.rank.id,
-				user.rank.name,
-				user.rank.image,
-				user.subscription,
-				user.total_downline
-			];
-
-			// Store the user data as an array in localStorage
-			localStorage.setItem("user", JSON.stringify(userArray));
-
-			// Optionally, store the entire user object (in case you need it for later)
-			localStorage.setItem("userObject", JSON.stringify(user));
-
-			console.log("User data stored in localStorage:", userArray); // Debug log
-
-
-			if (response.data.status) {
-				const { token, user } = response.data.result;
-
-				// Update context and navigate to dashboard
-				setToken(token);
-				setUser(user);
-
-				toast.success(response.data.message || "Login successful!");
-				navigate("/Dashboard");
-			} else {
-				throw new Error(response.data.message || "Login failed");
+	
+			if (!response.data?.result?.user) {
+				throw new Error("User data is missing from API response.");
 			}
+	
+			const user = response.data.result.user;
+			const token = response.data.result.token;
+	
+			// Ensure all properties exist before storing them
+			const userData = {
+				id: user?.id || null,
+				full_name: user?.full_name || "",
+				email: user?.email || "",
+				id_code: user?.id_code || "",
+				sponsor: user?.sponsor?.id_code || "null",
+				rank: user?.rank?.name || "",
+				rankImg: user?.rank?.image || "",
+				subscription: user?.subscription?.name || "",
+				subscriptionDate: user?.subscription?.expired_at || "",
+				remainingDays: user?.subscription?.remaining_days || 0,
+				total_downline: user?.total_downline || 0,
+			};
+	
+			// Store in localStorage safely
+			localStorage.setItem("user", JSON.stringify(userData));
+			localStorage.setItem("token", token); // Store token separately
+			
+			console.log("User data stored in localStorage:", userData);
+	
+			// Update React Context
+			setToken(token);
+			setUser(userData);
+	
+			toast.success(response.data.message || "Login successful!");
+	
+			// ✅ Ensure storage completes before navigation
+			setTimeout(() => navigate("/Dashboard"), 200);
 		} catch (error) {
-			console.error("Login error:", error.response?.data); // Debug log
-			console.error("Full error response:", error.response); // Log the full response
-			const errorMessage =
-				error.response?.data?.message ||
-				error.message ||
-				"Login failed";
-			toast.error(errorMessage);
+			console.error("Login error:", error.response?.data);
+			toast.error(error.response?.data?.message || "Login failed");
 		} finally {
 			setIsSubmitting(false);
 		}
 	};
-
+	
 	return (
 		<Box
 			sx={{

@@ -228,21 +228,18 @@ function Dashboard() {
 
 	const userArray = JSON.parse(localStorage.getItem("user"));
 
-	const userId = userArray.id;
-	const sponserId = userArray.sponsor.id_code;
-	const CurrentRank = userArray.rank.name; // Indexes correspond to the positions in the array
+	const userId = userArray.id ;
+	// const sponserId = userArray.sponsor.id_code;
+	const CurrentRank = userArray.rank.name ; // Indexes correspond to the positions in the array
 	const left_leg_cv = user.left_leg_cv;
 	const rankImg = userArray.rank.image?.url || 'https://via.placeholder.com/150';
-	const userSubscription = userArray.subscription.name;
-	const usersubscriptionDate = userArray.subscription.expired_at;
-	const usersubscriptionRemainingDays = userArray.subscription.remaining_days;
-	const total_downline = userArray.total_downline;
+	const userSubscription = userArray.subscription.name  ;
+	const usersubscriptionDate = userArray.subscription.expired_at  ;
+	const usersubscriptionRemainingDays = userArray.subscription.remaining_days ;
+	const total_downline = userArray.total_downline ;
 
 
 	
-	
-	console.log("User Data22:", userArray.id); // Log the user data
-	console.log("User ID:", userId);
 
 
 
@@ -730,7 +727,7 @@ function Dashboard() {
 							}}
 							variant="h6"
 						>
-							Sponsor ID: {sponserId}
+							{/* Sponsor ID: {sponserId} */}
 						</Typography>
 
 						<br />
