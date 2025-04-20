@@ -31,7 +31,7 @@ function Tank() {
 		try {
 			setLoading(true);
 			const response = await axios.get(
-				`${baseUrl}/user/tank?per_page=5&page=${page}`, // Fixed URL with query parameters
+				`${baseUrl}/user/tank?per_page=5&page=${page}`,
 				{
 					headers: {
 						Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ function Tank() {
 					},
 				}
 			);
-			console.log("Tank Data asd:",  response.data.result.data?.[0]?.id); // Debug log
+
 			if (response.data.status) {
 				const { data, meta } = response.data.result;
 				setTanks(data);
@@ -120,18 +120,30 @@ function Tank() {
 					</Box>
 				) : tanks.length > 0 ? (
 					<>
-						{tanks.map((member, index) => (
-							<RenderMember
-								key={member.id || index} // Use member.id as the key
-								full_name={member.full_name}
-								id_code={member.id_code}
-								id={member.id}
-								sponsor={member.sponsor}
-								mobile={member.mobile}
-								rank={member.rank}
-								getTanks={getTanks}
-							/>
-						))}
+						<Box
+							sx={{
+								display: "flex",
+								flexWrap: "wrap",
+								gap: "1em",
+								justifyContent: "center",
+								backgroundColor: "#091B29",
+								p: 2,
+							}}
+						>
+							{tanks.map((member, index) => (
+								<RenderMember
+									key={member.id || index}
+									full_name={member.full_name}
+									id_code={member.id_code}
+									id={member.id}
+									sponsor={member.sponsor}
+									mobile={member.mobile}
+									rank={member.rank}
+									getTanks={getTanks}
+								/>
+							))}
+						</Box>
+
 						<ThemeProvider theme={darkTheme}>
 							<CssBaseline />
 							<Box
@@ -142,10 +154,7 @@ function Tank() {
 								}}
 							>
 								<Pagination
-									sx={{
-										margin: "10px auto",
-										width: "max-content",
-									}}
+									sx={{ margin: "10px auto", width: "max-content" }}
 									color="primary"
 									count={pages}
 									page={page}
@@ -168,8 +177,7 @@ function Tank() {
 							No members in your tank.
 						</Typography>
 						<Typography variant="body1" sx={{ mt: 1 }}>
-							Your tank is currently empty. Start adding members
-							to see them here.
+							Your tank is currently empty. Start adding members to see them here.
 						</Typography>
 					</Box>
 				)}
@@ -180,19 +188,16 @@ function Tank() {
 
 export default Tank;
 
-function RenderMember({ id,full_name, id_code, sponsor, mobile, rank, getTanks }) {
+function RenderMember({ id, full_name, id_code, sponsor, mobile, rank, getTanks }) {
 	const { token, baseUrl } = useContext(Context);
 	const [loading, setLoading] = useState(false);
 
 	const append = async (leg) => {
 		try {
 			setLoading(true);
-			const response = await axios.post(
+			await axios.post(
 				`${baseUrl}/user/commission`,
-				{
-					referral_id: id, // Pass user ID
-					leg: leg, // "left" or "right"
-				},
+				{ referral_id: id, leg },
 				{
 					headers: {
 						Authorization: `Bearer ${token}`,
@@ -200,9 +205,8 @@ function RenderMember({ id,full_name, id_code, sponsor, mobile, rank, getTanks }
 					},
 				}
 			);
-
 			toast.success("User successfully placed!");
-			getTanks(); // Refresh tank members
+			getTanks();
 		} catch (err) {
 			toast.error(err.response?.data?.message || "Failed to place user");
 			console.error("Error placing user:", err);
@@ -214,28 +218,27 @@ function RenderMember({ id,full_name, id_code, sponsor, mobile, rank, getTanks }
 	return (
 		<Box
 			sx={{
-				height: "auto",
-				px: "30px",
-				py: "30px",
-				backgroundColor: "#091B29",
-				justifyContent: "space-between",
-				textAlign: "center",
+				width: 250,
+				p: 2,
+				backgroundColor: "#16222A",
+				borderRadius: "12px",
 				display: "flex",
+				flexDirection: "column",
+				justifyContent: "space-between",
+				textAlign: "left",
 				"&:hover": { bgcolor: "#794Bd922" },
 			}}
 		>
-			<Box sx={{ textAlign: "left" }}>
-				<Typography variant="h6">{full_name}</Typography>
-				<Typography variant="body2">ID: {id_code}</Typography>
-				<Typography variant="body2">Mobile: {mobile}</Typography>
-	
-		
-			</Box>
+			<Typography variant="h6">{full_name}</Typography>
+			<Typography variant="body2">ID: {id_code}</Typography>
+			<Typography variant="body2">Mobile: {mobile}</Typography>
+
 			<Box
 				sx={{
 					display: "flex",
 					gap: "1em",
-					alignItems: "center",
+					justifyContent: "center",
+					mt: 2,
 				}}
 			>
 				<Button
@@ -258,4 +261,3 @@ function RenderMember({ id,full_name, id_code, sponsor, mobile, rank, getTanks }
 		</Box>
 	);
 }
-
